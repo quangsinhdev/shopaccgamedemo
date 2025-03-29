@@ -15,3 +15,5 @@ WARNING: This is a development environment and it is not necessary to use enviro
 The API specification document is located inside /src/main/resource/static
 
 Oops: Edit the necessary configuration information in application.properties
+
+Please go to Issues to view API documents
