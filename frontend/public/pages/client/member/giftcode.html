@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giftcode Area | Shopaccgame.com</title>
+    <link rel="stylesheet" href="/css/giftcode.css">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+<header>
+    <div class="logo">
+        <a href="/" class="logo-link">
+            <img src="/assets/images/logoshop.png" alt="Logo" class="logo-image">
+        </a>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <i class="fas fa-bars"></i>Menu
+        </button>
+        <div class="dropdown-content">
+            <a href="/">Trang chủ</a>
+            <a href="/pages/client/member/profile.html">Trang cá nhân</a>
+            <a href="#" id="logout-btn">Đăng xuất</a>
+        </div>
+    </div>
+</header>
+
+
+<body>
+    <div class="container">
+        <div class="password-change-card">
+            <div class="profile-info">
+                <div class="avatar">
+                    <img src="/assets//images/memberlogo-2.webp"
+                        alt="Avatar">
+                </div>
+                <div class="details">
+                    <h3><span id="fullname-display"></span></h3>
+                    <p><i class="fa-solid fa-envelope"></i>Email: <span id="email-display"></span></p>
+                    <p><span><i class="fa-solid fa-money-check"></i>Số dư: <span
+                                id="balance-display"></span><sup>đ</sup></span></p>
+                    <p><i class="fa-solid fa-chart-simple"></i>Trạng thái: <span id="status-display"></span></p>
+                </div>
+            </div>
+
+            <h2 class="title-giftcode">Nhập mã Giftcode<i class="fa-solid fa-gift"></i></h2>
+            <form method="post" id="giftcode-form">
+                <div class="input-group">
+                    <label for="currentPassword">Nhập mã Giftcode</label>
+                    <input type="text" id="giftcode" name="code" placeholder="Nhập mã Giftcode tại đây..." required>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn-submit">Nhận quà Giftcode</button>
+                </div>
+            </form>
+
+            <div id="notification" class="notification" style="display: none;">
+                <span class="icon" id="notification-icon"></span>
+                <span id="notification-text"></span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Shopaccgame.com | <a href="/terms">Điều khoản sử dụng</a> | <a href="/privacy">Chính sách bảo
+                mật</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/users/giftcode.js"></script>
+</body>
+
+</html>

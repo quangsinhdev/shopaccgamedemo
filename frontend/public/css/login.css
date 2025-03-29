@@ -1,0 +1,517 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', san-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(/assets/images/background-login2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.login-form {
+    background: rgba(80, 77, 77, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(45px);
+    text-align: center;
+    color: white;
+    width: 400px;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
+}
+
+.login-form .field {
+    font-size: 16px;
+    color: white;
+    margin: 0;
+    text-align: left;
+    font-weight: 500;
+}
+
+.login-title {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.signup-title {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.recovery-title {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.input-box {
+    margin: 13px 0;
+    position: relative;
+}
+
+
+.input-box input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 12px 12px 12px 45px;
+    border-radius: 99px;
+    outline: 3px solid transparent;
+    transition: 0.3s;
+    font-size: 16px;
+    color: white;
+    font-weight: 500;
+}
+
+.input-box input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.input-box input:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-box input::-ms-reveal {
+    filter: invert(100%);
+}
+
+.input-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.input-box .info-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.info-text {
+    display: none;
+    font-size: 14px;
+    color: #f9f9f9;
+    margin-top: 5px;
+    white-space: pre-line;
+}
+
+.info-text.visible {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.instruction-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 15px;
+}
+
+.instruction-text i.fa-flag {
+    margin-right: 5px;
+}
+
+.instruction-text-content {
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+.info-icon {
+    cursor: pointer;
+    color: #f0f0f0;
+    margin-left: 10px;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: left;
+    color: black;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+    text-align: left;
+}
+
+.modal-content li {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.close-btn {
+    background-color: #ff5c5c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    align-self: center;
+}
+
+
+.modal-overlay.visible {
+    display: flex;
+}
+
+
+
+
+.remember-forgot-box {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.remember-forgot-box a {
+    text-align: right;
+}
+
+.remember-forgot-box label {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember-forgot-box input {
+    accent-color: white;
+    cursor: pointer;
+}
+
+.remember-forgot-box a {
+    color: white;
+    text-decoration: none;
+}
+
+.remember-forgot-box a:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px 0;
+    background: #CC99CC;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #0B87EC;
+}
+
+#login-button:disabled {
+    background-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.register {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register a {
+    text-decoration: none;
+    color: white;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+
+.register::after {
+    content: '';
+    display: block;
+    width: 60%;
+    margin: 10px auto;
+    border-bottom: 2px solid white;
+    border-radius: 10px;
+}
+
+.recovery-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 6px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 5px 0;
+}
+
+.recovery-btn:hover {
+    background: white;
+    color: black;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 9999;
+    display: none;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.notification .icon {
+    margin-right: 6px;
+    font-size: 24px;
+}
+
+.notification-login {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+
+.notification-login.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0s 0s;
+}
+
+
+
+.modal-popup-recover {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 30px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 9999;
+    display: none;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.modal-popup-recover.fadeIn {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.modal-popup-recover.fadeOut {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
+
+
+.success {
+    background-color: transparent;
+    border: 2px solid #f0f0f0;
+    color: #f0f0f0;
+}
+
+.error {
+    background-color: transparent;
+    border: 2px solid #f0f0f0;
+    color: #f0f0f0;
+}
+
+.locked {
+    border: 2px solid #f0f0f0;
+    color: #f0f0f0;
+    font-weight: 600;
+}
+
+
+.fadeIn {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.fadeOut {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
+
+#notification-text {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.notification-login {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 9999;
+    display: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification-logout {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: #778899;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 9999;
+    display: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification-oauth2locked {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: #EE7600;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    z-index: 9999;
+    display: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#notification-login p {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.social-btn i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.google-btn {
+    color: white;
+}
+
+.google-btn:hover {
+    background-color: #db4437;
+    color: white;
+    border-color: #db4437;
+}
+
+.facebook-btn {
+    color: white;
+}
+
+.facebook-btn:hover {
+    background-color: #3b5998;
+    color: white;
+    border-color: #3b5998;
+}

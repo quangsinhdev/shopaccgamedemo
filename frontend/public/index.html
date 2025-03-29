@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Acc Game - Shop Acc LOL Liên Quân FIFA tự động</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo-btn">
+            <a href="/"><img src="/assets/images/logoshop.png" alt="Logo Website"></a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/">Trang chủ<i class="fa-solid fa-house"></i></a></li>
+                <li><a href="/pages/client/member/recharge.html">Nạp tiền<i class="fa-solid fa-money-bill-1"></i></a></li>
+                <li><a href="/contacts">Liên hệ<i class="fa-solid fa-address-card"></i></a></li>
+                <li><a href="/pages/client/member/purchasehistory.html">Lịch sử Mua Tài khoản<i class="fa-solid fa-check-to-slot"></i></a></li>
+                <li><a href="/pages/client/member/rechargehistory.html">Lịch sử Nạp tiền<i class="fa-solid fa-receipt"></i></a></li>
+            </ul>
+        </nav>
+        <div id="balance-container">
+            <p id="balance-text">
+                Số dư : <span id="balance-display"></span><sub>đ</sub>
+            </p>
+        </div>
+        <div class="user-avatar" id="user-avatar">
+            <img src="/assets/images/memberlogo.png" alt="User Avatar" class="avatar">
+        </div>
+    </header>
+
+    <!-- Avatar Dropdown Menu -->
+    <div class="avatar-dropdown" id="avatar-dropdown">
+        <ul id="menu">
+            <li id="login-item"><a href="/pages/client/login.html">Đăng nhập</a></li>
+            <li id="user-item" style="display: none;">
+                <a href="#">Hi, <span id="fullname-display"></span></a>
+                <ul>
+                    <li><a href="/pages/client/member/profile.html">Trang cá nhân</a></li>
+                    <li><a href="#" id="logout-btn">Đăng xuất</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden"></div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <main class="content">
+            <div class="category-section">
+                <h2>SHOPACCGAME.COM</h2>
+                <ul class="category-list">
+                    <li class="category-item selected">Tất cả</li>
+                    <li class="category-item">FIFA ONLINE 4</li>
+                    <li class="category-item">Liên Minh Huyền Thoại</li>
+                    <li class="category-item">Liên Quân Mobile</li>
+                </ul>
+            </div>
+            <div class="account-list">
+                <h3>Danh sách tài khoản</h3>
+                <!-- Thêm nút sắp xếp -->
+                <div class="controls">
+                    <button class="sort-btn-price">Sắp xếp giá ↓</button>
+                </div>
+                <div id="accounts-container"></div>
+               
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal chi tiết tài khoản -->
+    <div id="account-info-modal" class="modal info-modal" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-content info-modal-content">
+            <span class="close-modal" aria-label="Đóng modal">×</span>
+            <h2 id="modal-title">Chi tiết tài khoản</h2>
+            <div class="info-container">
+                <div class="info-images">
+                    <div id="info-account-images" class="image-gallery" role="region" aria-labelledby="modal-title">
+                    </div>
+                </div>
+                <div class="info-details">
+                    <p><strong>Tài khoản:</strong> <span id="info-account-name"></span></p>
+                    <p><strong>Mã số tài khoản:</strong> <span id="info-account-id"></span></p>
+                    <p><strong>Thông tin thêm:</strong> <span id="info-account-description"></span></p>
+                    <p><strong>Giá gốc:</strong> <span id="info-account-price"></span> VNĐ</p>
+                    <p id="info-discounted-price" style="display: none;"><strong>Giá khuyến mãi:</strong> <span
+                            id="info-account-discounted-price"></span> VNĐ</p>
+                    <p id="info-discount" style="display: none;"><strong>Giảm giá:</strong> <span
+                            id="info-account-discount"></span>%</p>
+
+                    <!-- FIFA -->
+                    <p id="fifa-gtdh" style="display: none;"><strong>GTDH:</strong> <span id="info-fifa-gtdh"></span>
+                    </p>
+                    <p id="fifa-bp" style="display: none;"><strong>BP:</strong> <span id="info-fifa-bp"></span></p>
+                    <p id="fifa-fc" style="display: none;"><strong>FC:</strong> <span id="info-fifa-fc"></span></p>
+
+                    <!-- LOL -->
+                    <p id="lol-rp" style="display: none;"><strong>RP:</strong> <span id="info-lol-rp"></span></p>
+                    <p id="lol-champ" style="display: none;"><strong>Champ:</strong> <span id="info-lol-champ"></span>
+                    </p>
+                    <p id="lol-skin" style="display: none;"><strong>Skin:</strong> <span id="info-lol-skin"></span></p>
+                    <p id="lol-rank" style="display: none;"><strong>Rank:</strong> <span id="info-lol-rank"></span></p>
+
+                    <!-- LQ -->
+                    <p id="lq-champ" style="display: none;"><strong>Champ:</strong> <span id="info-lq-champ"></span></p>
+                    <p id="lq-skin" style="display: none;"><strong>Skin:</strong> <span id="info-lq-skin"></span></p>
+                    <p id="lq-rank" style="display: none;"><strong>Rank:</strong> <span id="info-lq-rank"></span></p>
+
+                    <div class="buy-info-btn-container">
+                        <button id="buy-from-info-btn" class="buy-info-btn">Mua tài khoản</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận mua -->
+    <div id="purchase-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <h2>Xác nhận mua tài khoản</h2>
+            <p>Bạn có chắc chắn muốn mua tài khoản này không?</p>
+            <div class="account-details">
+                <p><strong>Tài khoản:</strong> <span id="modal-account-name"></span></p>
+                <p><strong>Giá gốc:</strong> <span id="modal-account-price"></span> VNĐ</p>
+                <p id="modal-discounted-price" style="display: none;"><strong>Giá sau khuyến mãi:</strong> <span
+                        id="modal-account-discounted-price"></span> VNĐ</p>
+                <p id="modal-discount" style="display: none;"><strong>Giảm giá:</strong> <span
+                        id="modal-account-discount"></span>%</p>
+                <div class="voucher-section">
+                    <label for="voucher-code">Mã Voucher:</label>
+                    <input type="text" id="voucher-code" placeholder="Nhập mã voucher">
+                    <button id="apply-voucher-btn">Áp dụng</button>
+                </div>
+                <p id="modal-final-price"><strong>Giá cuối cùng:</strong> <span id="modal-account-final-price"></span>
+                    VNĐ</p>
+            </div>
+            <div class="modal-buttons">
+                <button id="confirm-purchase-btn">Xác nhận</button>
+                <button id="cancel-purchase-btn">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal phóng to hình ảnh -->
+    <div id="image-zoom-modal" class="modal">
+        <div class="modal-content image-zoom-content">
+            <span class="close-modal-detail">×</span>
+            <img id="zoomed-image" src="" alt="Zoomed Image" class="zoomed-image">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/homepage/homepage.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử Mua Tài Khoản | Shopaccgame.com</title>
+    <link rel="stylesheet" href="/css/purchasehistory.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/" class="logo-link">
+                <img src="/assets/images/logoshop.png" alt="Logo" class="logo-image">
+            </a>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <i class="fas fa-bars"></i>Menu
+            </button>
+            <div class="dropdown-content">
+                <a href="/">Trang chủ</a>
+                <a href="/pages/client/member/profile.html">Trang cá nhân</a>
+                <a href="#" id="logout-btn">Đăng xuất</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="title">Lịch sử Mua Tài khoản<i class="fa-solid fa-receipt"></i></h1>
+
+        <div class="sort-container">
+            <label for="purchase-history-sort">Sắp xếp theo:</label>
+            <select id="purchase-history-sort" class="sort-select">
+                <option value="transactionDate,desc">Ngày mua (mới nhất)</option>
+                <option value="transactionDate,asc">Ngày mua (cũ nhất)</option>
+                <option value="price,desc">Giá (cao đến thấp)</option>
+                <option value="price,asc">Giá (thấp đến cao)</option>
+            </select>
+        </div>
+
+        <table class="purchase-history">
+            <thead>
+                <tr>
+                    <th>Loại Game</th>
+                    <th>Mã Số Tài Khoản</th>
+                    <th>Giá Mua</th>
+                    <th>Tài Khoản</th>
+                    <th>Mật Khẩu</th>
+                    <th>Email</th>
+                    <th>SĐT</th>
+                    <th>Thời điểm mua</th>
+                    <th>Thông Tin Thêm</th>
+                </tr>
+            </thead>
+            <tbody id="purchase-history-body">
+            </tbody>
+        </table>
+
+    </div>
+
+    <footer>
+        <p>© 2025 Shopaccgame | <a href="/terms">Điều khoản sử dụng</a> | <a href="/privacy">Chính sách bảo mật</a></p>
+    </footer>
+
+    <script src="/js/users/purchase-history.js"></script>
+</body>
+</html>

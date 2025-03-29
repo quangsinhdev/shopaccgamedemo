@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập | Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="notification-login" class="notification" style="display: none;">
+        <p id="notification-login-text"></p>
+    </div>
+    <div id="notification-oauth2locked" style="display: none;">
+        <span id="notification-oauth2locked-text"></span>
+    </div>
+    <form action="/api/auth/login" method="post" class="login-form" id="login-form">
+        <h1 class="login-title">ĐĂNG NHẬP <i class="fa-solid fa-arrow-right-to-bracket"></i></h1>
+        <div class="input-box">
+            <i class="fa-regular fa-circle-user"></i>
+            <input type="text" name="username" id="login-username" placeholder="Tài khoản">
+        </div>
+        <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" name="password" id="login-password" placeholder="Mật khẩu...">
+        </div>
+        <div class="remember-forgot-box">
+            <a href="/pages/client/recovery.html">Quên mật khẩu?</a>
+        </div>
+        <button id="login-submit-button" class="login-btn" type="submit">Đăng nhập</button>
+        <p class="register">Chưa có tài khoản? <a href="#" id="show-register"><b>Đăng ký ngay</b></a></p>
+        <div class="social-login">
+            <a href="http://localhost:8080/oauth2/authorization/google" class="social-btn google-btn">
+                <i class="fab fa-google"></i> Đăng nhập qua Google
+            </a>
+        </div>
+    </form>
+
+    <div id="register-modal" class="modal" style="display: none;">
+        <form action="/login/registry" method="post" id="register-form" class="login-form">
+            <h1 class="signup-title">ĐĂNG KÝ <i class="fa-solid fa-arrow-right-to-bracket"></i></h1>
+            <div class="input-box">
+                <i class="fa-solid fa-id-card"></i>
+                <input type="text" name="fullname" id="fullname" placeholder="Họ tên hoặc nickname của bạn">
+            </div>
+            <div class="input-box">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" name="email" id="email" placeholder="Email của bạn">
+            </div>
+            <div class="input-box">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" name="username" id="username" placeholder="Tài khoản">
+            </div>
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="password" id="password" placeholder="Mật khẩu ***">
+            </div>
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Nhập lại mật khẩu">
+            </div>
+            <button class="login-btn" id="submit-button">Tạo tài khoản</button>
+            <p class="instruction-text">
+                <i class="fa-regular fa-flag"></i>
+                <span class="instruction-text-content">Hướng dẫn đăng ký:</span>
+                <i class="fa-solid fa-circle-exclamation info-icon" aria-hidden="true"></i>
+            </p>
+            <div class="modal-overlay" id="modalOverlay">
+                <div class="modal-content">
+                    <ul>
+                        <li>Họ tên, nickname có thể viết dấu nhưng không chứa ký tự đặc biệt</li>
+                        <li>Email không chứa khoảng trắng, ký tự đặc biệt, trừ "@" và "."</li>
+                        <li>Tài khoản không chứa khoảng trắng, ký tự đặc biệt</li>
+                        <li>Khuyến nghị: Dùng mật khẩu có ký tự đặc biệt và khó đoán</li>
+                    </ul>
+                    <button id="closeModal" class="close-btn">Xác nhận</button>
+                </div>
+            </div>
+            <p class="register">Đã có tài khoản? <a href="#" id="show-login"><b>Đăng nhập ngay</b></a></p>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/authentications/login-registry.js"></script>
+</body>
+</html>

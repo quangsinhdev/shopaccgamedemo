@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử Nạp tiền | Shopaccgame.com</title>
+    <link rel="stylesheet" href="/css/rechargehistory.css">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+
+        .loading-text {
+            padding: 20px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .no-more-data {
+            padding: 20px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/" class="logo-link">
+                <img src="/assets/images/logoshop.png" alt="Logo" class="logo-image">
+            </a>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <i class="fas fa-bars"></i>Menu
+            </button>
+            <div class="dropdown-content">
+                <a href="/">Trang chủ</a>
+                <a href="/pages/client/member/profile.html">Trang cá nhân</a>
+                <a href="#" id="logout-btn">Đăng xuất</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="title">Lịch sử Nạp tiền</h1>
+        
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="card">Thẻ cào</button>
+            <button class="tab-btn" data-tab="vnpay">VNPay</button>
+        </div>
+
+        <div class="tab-content">
+            <div id="card" class="tab-pane active">
+                <div class="sort-container">
+                    <label for="card-sort">Sắp xếp theo:</label>
+                    <select id="card-sort" class="sort-select">
+                        <option value="timeOfDepositing,desc">Ngày nạp (mới nhất)</option>
+                        <option value="timeOfDepositing,asc">Ngày nạp (cũ nhất)</option>
+                        <option value="value,desc">Mệnh giá (cao đến thấp)</option>
+                        <option value="value,asc">Mệnh giá (thấp đến cao)</option>
+                    </select>
+                </div>
+                <table class="purchase-history">
+                    <thead>
+                        <tr>
+                            <th>Nhà mạng</th>
+                            <th>Serial</th>
+                            <th>Mã thẻ</th>
+                            <th>Mệnh giá</th>
+                            <th>Thực nhận</th>
+                            <th>Ngày nạp tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="loading-container"></div>
+            </div>
+
+            <div id="vnpay" class="tab-pane">
+                <div class="sort-container">
+                    <label for="vnpay-sort">Sắp xếp theo:</label>
+                    <select id="vnpay-sort" class="sort-select">
+                        <option value="timeOfDepositing,desc">Ngày nạp (mới nhất)</option>
+                        <option value="timeOfDepositing,asc">Ngày nạp (cũ nhất)</option>
+                        <option value="amount,desc">Số tiền (cao đến thấp)</option>
+                        <option value="amount,asc">Số tiền (thấp đến cao)</option>
+                    </select>
+                </div>
+                <table class="purchase-history">
+                    <thead>
+                        <tr>
+                            <th>Số tiền nạp</th>
+                            <th>Mã giao dịch</th>
+                            <th>Ngày nạp tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="loading-container"></div>
+            </div>
+        </div>
+
+        <button class="refresh-btn">Làm mới</button>
+    </div>
+
+    <footer>
+        <p>© 2025 Shopaccgame | <a href="/terms">Điều khoản sử dụng</a> | <a href="/privacy">Chính sách bảo mật</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/users/recharge-history.js"></script>
+</body>
+</html>

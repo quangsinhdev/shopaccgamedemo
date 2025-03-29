@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp Tiền | Shopaccgame.com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/recharge.css">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo-btn">
+                <a href="/"><img src="/assets/images/logoshop.png" alt="Logo"></a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Trang chủ<i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="/pages/client/member/recharge.html">Nạp tiền<i class="fa-solid fa-money-bill-1"></i></a></li>
+                    <li><a href="/contacts">Liên hệ<i class="fa-solid fa-address-card"></i></a></li>
+                    <li><a href="/pages/client/member/purchasehistory.html">Lịch sử Mua tài khoản<i class="fa-solid fa-check-to-slot"></i></a></li>
+                    <li><a href="/pages/client/member/rechargehistory.html">Lịch sử Giao dịch<i class="fa-solid fa-receipt"></i></a></li>
+                </ul>
+            </nav>
+            <div id="balance-container">
+                <p id="balance-text">
+                    Số dư : <span id="balance-display"></span><sub>đ</sub>
+                </p>
+            </div>
+            <div class="user-avatar" id="user-avatar">
+                <img class="avatar" src="/assets/images/memberlogo.png" alt="Avatar">
+            </div>
+        </div>
+        <div class="avatar-dropdown" id="avatar-dropdown">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="/pages/client/member/profile.html">Trang cá nhân</a></li>
+                <li><a href="#" id="logout-btn">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="payment-container">
+            <div class="left-side">
+                <h3>Nạp tiền qua thẻ cào</h3>
+                <div class="network-logos">
+                    <div class="network-logo viettel">
+                        <img src="/assets/images/viettel.png" alt="Viettel Logo" />
+                    </div>
+                    <div class="network-logo mobifone">
+                        <img src="/assets/images/mobifone.png" alt="Mobifone Logo" />
+                    </div>
+                    <div class="network-logo vinaphone">
+                        <img src="/assets/images/vinaphone.png" alt="Vinaphone Logo" />
+                    </div>
+                </div>
+
+                <div class="discount-fees">
+                    <div class="fee viettel-fee">
+                        <p></p>
+                    </div>
+                    <div class="fee mobifone-fee">
+                        <p></p>
+                    </div>
+                    <div class="fee vinaphone-fee">
+                        <p></p>
+                    </div>
+                </div>
+                <form id="card-recharge-form">
+                    <div class="form-group">
+                        <label for="card-type">Loại thẻ cào</label>
+                        <select id="card-type" class="form-control">
+                            <option value="viettel">Viettel</option>
+                            <option value="mobifone">Mobifone</option>
+                            <option value="vinaphone">Vinaphone</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="value-option">Mệnh giá thẻ cào</label>
+                        <select id="card-value" class="form-control">
+                            <option value="20000">20.000đ</option>
+                            <option value="50000">50.000đ</option>
+                            <option value="100000">100.000đ</option>
+                            <option value="200000">200.000đ</option>
+                            <option value="500000">500.000đ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-serial">Serial thẻ</label>
+                        <input type="text" id="card-serial" class="form-control" placeholder="Nhập số Seri" />
+                    </div>
+                    <div class="form-group">
+                        <label for="card-pin">Mã thẻ</label>
+                        <input type="text" id="card-pin" class="form-control" placeholder="Nhập mã thẻ" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Nạp Tiền</button>
+                </form>
+            </div>
+            <div class="right-side">
+                <h3>Nạp tiền qua VNPay</h3>
+                <div id="form-container">
+                    <form id="vnpay-recharge-form">
+                        <div class="vnpay-logo">
+                            <img src="/assets/images/vnpay.webp" alt="VNPay Logo" />
+                        </div>
+                        <div class="form-group">
+                            <label for="vnpay-amount">Số tiền nạp (VND)</label>
+                            <input type="number" id="vnpay-amount" class="form-control" min="10000" placeholder="Nhập số tiền (tối thiểu 10.000đ)" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Nạp tiền qua VNPay</button>
+                    </form>
+                </div>
+            </div>
+            <div class="under-left-side">
+                <div class="payment-method qr-momo">
+                    <h3>Nạp tiền qua QR Code Momo</h3>
+                    <div class="qr-code">
+                        <img src="" alt="Momo QR Code" />
+                        <p>Quét mã QR để nạp tiền qua Momo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="under-right-side">
+                <div class="payment-method qr-viettel-money">
+                    <h3>Nạp tiền qua QR Code Viettel Money</h3>
+                    <div class="qr-code">
+                        <img src="" alt="Viettel Money QR Code" />
+                        <p>Quét mã QR để nạp tiền qua Viettel Money</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="notification" class="notification">
+            <span class="icon" id="notification-icon"></span>
+            <span id="notification-text"></span>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/users/recharge.js"></script>
+</body>
+</html>

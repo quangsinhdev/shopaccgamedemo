@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | Shopaccgame.com</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+<header>
+    <div class="logo">
+        <a href="/" class="logo-link">
+            <img src="/assets/images/logoshop.png" alt="Logo" class="logo-image">
+        </a>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/">Trang chủ</a>
+            <a href="/pages/client/member/profile.html">Trang cá nhân</a>
+            <a href="#" id="logout-btn">Đăng xuất</a>
+        </div>
+    </div>
+
+</header>
+
+<body>
+    <div class="container">
+        <main>
+            <div class="profile-info">
+                <div class="avatar">
+                    <img src="/assets/images/memberlogo-2.webp"
+                        alt="User Avatar">
+                </div>
+                <div class="details">
+                    <h3><span id="fullname-display"></span></h3>
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email: <span id="email-display"></span></span>
+                    </p>
+                    <p>
+                        <span><i class="fa-solid fa-chart-simple"></i>Trạng thái: <span
+                                id="status-display"></span></span>
+                        <i class="fa-regular fa-circle-check"></i>
+                    </p>
+                    <p>
+                        <span><i class="fa-solid fa-money-check"></i>Số dư: <span
+                                id="balance-display"></span><sup>đ</sup></span>
+
+                    </p>
+                </div>
+                <div class="settings">
+                    <div class="settings-item">
+                        <button class="btn" onclick="window.location.href='/';">Trang chủ<i
+                                class="fa fa-home"></i></button>
+                    </div>
+                    <div class="settings-item">
+                        <button class="btn"
+                            onclick="window.location.href='/pages/client/member/changepassword.html';">Đổi mật khẩu<i
+                                class="fa fa-lock"></i></button>
+                    </div>
+                    <div class="settings-item">
+                        <button class="btn"
+                            onclick="window.location.href='/pages/client/member/purchasehistory.html';">Lịch sử mua tài
+                            khoản<i class="fa-solid fa-clock-rotate-left"></i></button>
+                    </div>
+                    <div class="settings-item">
+                        <button class="btn"
+                            onclick="window.location.href='/pages/client/member/rechargehistory.html';">Lịch sử Nạp tiền<i class="fa-solid fa-clock-rotate-left"></i></button>
+                    </div>
+                    <div class="settings-item">
+                        <button class="btn" onclick="window.location.href='/pages/client/member/giftcode.html';">Nhập mã
+                            Giftcode<i class="fa-solid fa-gift"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-grid">
+                <div>
+                    <h4>Tên tài khoản</h4>
+                    <p><span id="username-display"></span></p>
+                </div>
+                <div>
+                    <h4>Thời điểm đăng ký</h4>
+                    <p><span id="created-at-display"></span></p>
+                </div>
+                <div>
+                    <h4>Vai trò</h4>
+                    <p><span id="role-display"></span></p>
+                </div>
+                <div>
+                    <h4>Tổng tiền đã nạp</h4>
+                    <p><span id="totaldeposit-display"></span><sup>đ</sup></p>
+                </div>
+            </div>
+
+            <footer>
+                <p>Bạn cần hỗ trợ? <a href="#">Liên hệ ngay</a></p>
+            </footer>
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/users/profile.js"></script>
+</body>
+
+</html>

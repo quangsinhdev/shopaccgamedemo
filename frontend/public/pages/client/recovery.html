@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khôi phục mật khẩu | Shopaccgame.com</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://kit.fontawesome.com/67afa8d00d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <form id="recovery-form" method="post" class="login-form">
+        <h1 class="recovery-title">KHÔI PHỤC MẬT KHẨU</h1>
+        <div class="input-box">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" name="username" id="username" placeholder="Tài khoản" minlength="8" maxlength="50">
+        </div>
+        <div class="input-box">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" name="email" id="email" placeholder="Nhập Email của tài khoản">
+        </div>
+        <button type="submit" id="submit-button" class="recovery-btn">Khôi phục mật khẩu</button>
+        <p class="register"><i class="fa-regular fa-comment-dots"></i> Thử lại đăng nhập? <a href="/pages/client/login.html" id="show-register"><b>Đăng nhập ngay</b></a></p>
+    </form>
+
+    <div id="notification" class="notification" style="display:none;">
+        <p id="notification-text"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/authentications/password-recovery.js"></script>
+
+</body>
+
+</html>

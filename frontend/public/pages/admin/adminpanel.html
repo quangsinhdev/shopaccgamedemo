@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/css/admin.css">
+   <script src="https://kit.fontawesome.com/67afa8d00d.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+<body>
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Đăng nhập</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Tên tài khoản</label>
+                    <input type="text" id="login-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Mật khẩu</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Trang chủ</a></li>
+            <li><a href="#" onclick="logout()">Đăng xuất</a></li>
+        </ul>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li onclick="showSection('post-game-account')"><i class="fas fa-plus"></i> Đăng tài khoản</li>
+            <li onclick="showSection('stats-game-accounts')"><i class="fas fa-chart-bar"></i> Thống kê tài khoản</li>
+            <li onclick="showSection('create-voucher')"><i class="fas fa-ticket-alt"></i> Tạo Voucher</li>
+            <li onclick="showSection('create-giftcode')"><i class="fas fa-ticket-alt"></i> Tạo Giftcode</li>
+            <li onclick="showSection('stats-vouchers')"><i class="fas fa-list"></i> Thống kê Voucher</li>
+            <li onclick="showSection('stats-giftcode')"><i class="fas fa-list"></i> Thống kê Giftcode</li>
+            <li onclick="showSection('stats-users')"><i class="fas fa-users"></i> Thống kê User</li>
+            <li onclick="showSection('stats-transactions')"><i class="fas fa-exchange-alt"></i> Thống kê giao dịch</li>
+            <li onclick="showSection('manage-cards')"><i class="fas fa-credit-card"></i> Quản lý thẻ cào</li>
+            <li onclick="showSection('update-settings')"><i class="fas fa-cog"></i> Cập nhật thông tin</li>
+        </ul>
+    </div>
+
+    <!-- Post new game account -->
+    <div id="post-game-account" class="main-content active">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Đăng tài khoản mới</h2>
+        </div>
+        <form id="post-game-account-form" class="settings-form">
+            <div class="form-group">
+                <label for="post-gameType">Thể loại Game</label>
+                <select id="post-gameType" name="gameAccountType" class="form-control" required onchange="updatePostGameFields()">
+                    <option value="FIFA">Fifa Online 4</option>
+                    <option value="LOL">Liên Minh Huyền Thoại</option>
+                    <option value="LQ">Liên Quân Mobile</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="post-username">Tài khoản</label>
+                <input type="text" id="post-username" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="post-password">Mật khẩu</label>
+                <input type="password" id="post-password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="post-phone">Số điện thoại</label>
+                <input type="text" id="post-phone" name="phonenumber" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="post-email">Email</label>
+                <input type="email" id="post-email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="post-description">Mô tả chi tiết tài khoản</label>
+                <textarea id="post-description" name="description" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="post-price">Giá tiền</label>
+                <input type="number" id="post-price" name="price" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="post-discount">Giá trị giảm giá (%)</label>
+                <input type="number" id="post-discount" name="discount" class="form-control" value="0">
+            </div>
+            <div class="form-group">
+                <label for="post-imageUrls">URL hình ảnh tài khoản (cách nhau bằng dấu phẩy)</label>
+                <textarea id="post-imageUrls" name="imageUrls" class="form-control" rows="3"></textarea>
+            </div>
+        
+            <div id="fifa-fields" class="dynamic-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="post-bp">Số BP</label>
+                    <input type="number" id="post-bp" name="bp" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-fc">Số FC</label>
+                    <input type="number" id="post-fc" name="fc" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-teamValue">Giá trị đội hình (VND)</label>
+                    <input type="number" id="post-teamValue" name="valueteam" class="form-control">
+                </div>
+            </div>
+        
+            <div id="lol-fields" class="dynamic-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="post-blueEssence">Số Tinh Hoa Lam</label>
+                    <input type="number" id="post-blueEssence" name="tinhhoalam" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-champions">Số Tướng</label>
+                    <input type="number" id="post-champions" name="champ" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-skins">Số Trang Phục</label>
+                    <input type="number" id="post-skins" name="skin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-rp">Số RP</label>
+                    <input type="number" id="post-rp" name="rp" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-rank">Rank</label>
+                    <select id="post-rank" name="rank" class="form-control">
+                        <option value="Iron">Iron</option>
+                        <option value="Bronze">Bronze</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Diamond">Diamond</option>
+                        <option value="Master">Master</option>
+                        <option value="Grandmaster">Grandmaster</option>
+                        <option value="Challenger">Challenger</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div id="lienquan-fields" class="dynamic-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="post-lienquanChampions">Số Tướng</label>
+                    <input type="number" id="post-lienquanChampions" name="champ" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-lienquanSkins">Số Trang Phục</label>
+                    <input type="number" id="post-lienquanSkins" name="skin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post-lienquanRank">Rank</label>
+                    <select id="post-lienquanRank" name="rank" class="form-control">
+                        <option value="Đồng">Đồng</option>
+                        <option value="Bạc">Bạc</option>
+                        <option value="Vàng">Vàng</option>
+                        <option value="Bạch Kim">Bạch Kim</option>
+                        <option value="Kim Cương">Kim Cương</option>
+                        <option value="Cao Thủ">Cao Thủ</option>
+                        <option value="Thách Đấu">Thách Đấu</option>
+                    </select>
+                </div>
+            </div>
+        
+            <button type="submit" class="btn btn-update">Đăng tài khoản</button>
+        </form>
+    </div>
+
+    <!-- Game Account Statistics -->
+    <div id="stats-game-accounts" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Thống kê tài khoản</h2>
+        </div>
+    
+        <!-- Thêm giao diện bộ lọc -->
+        <div class="filters">
+            <h3>Lọc tài khoản</h3>
+            <div class="filter-group">
+                <label>Loại game:</label>
+                <label><input type="checkbox" class="game-type-filter" value="fifa" checked> FIFA</label>
+                <label><input type="checkbox" class="game-type-filter" value="lol" checked> Liên Minh Huyền Thoại</label>
+                <label><input type="checkbox" class="game-type-filter" value="lq" checked> Liên Quân Mobile</label>
+            </div>
+            <div class="filter-group">
+                <label>Trạng thái:</label>
+                <label><input type="checkbox" class="status-filter" value="SELLING" checked> Đang bán</label>
+                <label><input type="checkbox" class="status-filter" value="SOLD" checked> Đã bán</label>
+            </div>
+            <div class="filter-group">
+                <label>Khoảng giá (VND):</label>
+                <input type="number" id="price-min" placeholder="Giá tối thiểu" min="0">
+                <input type="number" id="price-max" placeholder="Giá tối đa" min="0">
+            </div>
+            <button id="apply-filters">Áp dụng bộ lọc</button>
+        </div>
+    
+        <div class="stats-panel">
+            <div class="stats-card">
+                <h3>Fifa Online 4</h3>
+                <p><i class="fas fa-gamepad"></i> Đang bán: <span id="fifa-selling">0</span></p>
+                <p><i class="fas fa-check"></i> Đã bán: <span id="fifa-sold">0</span></p>
+            </div>
+            <div class="stats-card">
+                <h3>Liên Minh Huyền Thoại</h3>
+                <p><i class="fas fa-gamepad"></i> Đang bán: <span id="lol-selling">0</span></p>
+                <p><i class="fas fa-check"></i> Đã bán: <span id="lol-sold">0</span></p>
+            </div>
+            <div class="stats-card">
+                <h3>Liên Quân Mobile</h3>
+                <p><i class="fas fa-gamepad"></i> Đang bán: <span id="lq-selling">0</span></p>
+                <p><i class="fas fa-check"></i> Đã bán: <span id="lq-sold">0</span></p>
+            </div>
+        </div>
+    
+        <div id="loading-indicator" style="display: none; text-align: center;">
+            <p>Đang tải...</p>
+        </div>
+    
+        <div class="table-container">
+            <div class="table-header">
+                <p>Đã tải: <span id="loaded-accounts-count">0</span> tài khoản</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Loại Game</th>
+                        <th>Mã số tài khoản</th>
+                        <th>Tên tài khoản</th>
+                        <th>Giá</th>
+                        <th>Ngày đăng</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="game-accounts-table"></tbody>
+            </table>
+        </div>
+    
+        <div id="load-more-trigger" style="height: 1px;"></div>
+    </div>
+
+    <!-- Game Account Detail and edit game account -->
+    <div id="detail-game-account" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Chi tiết tài khoản</h2>
+        </div>
+        <form id="update-game-account-form" class="settings-form">
+            <input type="hidden" id="game-account-id" name="id">
+            <div class="form-group">
+                <label for="update-gameType">Thể loại Game</label>
+                <select id="update-gameType" name="gameAccountType" class="form-control" disabled>
+                    <option value="FIFA">Fifa Online 4</option>
+                    <option value="LOL">Liên Minh Huyền Thoại</option>
+                    <option value="LQ">Liên Quân Mobile</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="update-username">Tài khoản</label>
+                <input type="text" id="update-username" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="update-password">Mật khẩu</label>
+                <input type="password" id="update-password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="update-phonenumber">Số điện thoại</label>
+                <input type="text" id="update-phonenumber" name="phonenumber" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="update-email">Email</label>
+                <input type="email" id="update-email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="update-description">Mô tả chi tiết tài khoản</label>
+                <textarea id="update-description" name="description" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="update-discount">Giá tài khoản</label>
+                <input type="number" id="update-price" name="price" class="form-control" value="0">
+            </div>
+            <div class="form-group">
+                <label for="update-discount">Giá trị giảm giá (%)</label>
+                <input type="number" id="update-discount" name="discount" class="form-control" value="0">
+            </div>
+            <div class="form-group">
+                <label for="update-imageUrls">URL hình ảnh tài khoản (cách nhau bằng dấu phẩy)</label>
+                <textarea id="update-imageUrls" name="imageUrls" class="form-control" rows="3"></textarea>
+            </div>
+        
+            <div id="update-fifa-fields" class="dynamic-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="update-bp">Số BP</label>
+                    <input type="number" id="update-bp" name="bp" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-fc">Số FC</label>
+                    <input type="number" id="update-fc" name="fc" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-valueteam">Giá trị đội hình (VND)</label>
+                    <input type="number" id="update-valueteam" name="valueteam" class="form-control">
+                </div>
+            </div>
+        
+            <div id="update-lol-fields" class="dynamic-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="update-tinhhoalam">Số Tinh Hoa Lam</label>
+                    <input type="number" id="update-tinhhoalam" name="tinhhoalam" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-champ">Số Tướng</label>
+                    <input type="number" id="update-lol-champ" name="champ" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-skin">Số Trang Phục</label>
+                    <input type="number" id="update-lol-skin" name="skin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-rp">Số RP</label>
+                    <input type="number" id="update-rp" name="rp" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-lol-rank">Rank</label>
+                    <select id="update-lol-rank" name="rank" class="form-control">
+                        <option value="Iron">Iron</option>
+                        <option value="Bronze">Bronze</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Diamond">Diamond</option>
+                        <option value="Master">Master</option>
+                        <option value="Grandmaster">Grandmaster</option>
+                        <option value="Challenger">Challenger</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div id="update-lienquan-fields" class="dynamic-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="update-champ">Số Tướng</label>
+                    <input type="number" id="update-lq-champ" name="champ" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-skin">Số Trang Phục</label>
+                    <input type="number" id="update-lq-skin" name="skin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="update-lq-rank">Rank</label>
+                    <select id="update-lq-rank" name="rank" class="form-control">
+                        <option value="Đồng">Đồng</option>
+                        <option value="Bạc">Bạc</option>
+                        <option value="Vàng">Vàng</option>
+                        <option value="Bạch Kim">Bạch Kim</option>
+                        <option value="Kim Cương">Kim Cương</option>
+                        <option value="Cao Thủ">Cao Thủ</option>
+                        <option value="Thách Đấu">Thách Đấu</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="button-container">
+                <button type="submit" class="btn btn-update">Cập nhật</button>
+                <button type="button" class="btn btn-lock" onclick="deleteGameAccount()">Xóa</button>
+                <a href="#" class="btn btn-back" onclick="showSection('stats-game-accounts')">Trở về</a>
+            </div>
+        </form>
+    </div>
+
+   <!-- Post New Voucher -->
+   <div id="create-voucher" class="main-content">
+    <div class="dashboard-header">
+        <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+    </div>
+    <div class="feedback-detail-header">
+        <h2>Tạo Voucher</h2>
+    </div>
+    <form id="create-voucher-form" class="settings-form">
+        <div class="form-group">
+            <label for="voucher-code">Mã code</label>
+            <input type="text" id="voucher-code" name="code" class="form-control" required>
+            <button type="button" class="btn btn-random-voucher">Random</button>
+        </div>
+        <div class="form-group">
+            <label for="voucher-value">Giá trị (VND)</label>
+            <input type="number" id="voucher-value" name="value" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="voucher-expiration">Thời hạn</label>
+            <input type="date" id="voucher-expiration" name="voucherExpireDate" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-update">Tạo Voucher</button>
+    </form>
+</div>
+
+    <!-- Post New Giftcode -->
+    <div id="create-giftcode" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Tạo Giftcode</h2>
+        </div>
+        <form id="create-giftcode-form" class="settings-form">
+            <div class="form-group">
+                <label for="giftcode-code">Mã code</label>
+                <input type="text" id="giftcode-code" name="code" class="form-control" required>
+                <button type="button" class="btn" onclick="generateRandomCode()">Random</button>
+            </div>
+            <div class="form-group">
+                <label for="giftcode-value">Giá trị (VND)</label>
+                <input type="number" id="giftcode-value" name="value" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="giftcodeInfo">Thông tin thêm</label>
+                <input type="text" id="giftcodeInfo" name="giftcodeInfo" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-update">Tạo Giftcode</button>
+        </form>
+    </div>
+
+    <!-- Voucher Statistics -->
+    <div id="stats-vouchers" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Thống kê Voucher</h2>
+            <div class="sort-controls">
+                <label for="voucher-sort-field">Sắp xếp theo: </label>
+                <select id="voucher-sort-field" class="sort-field">
+                    <option value="id">ID</option>
+                    <option value="value">Giá trị</option>
+                    <option value="timeOfListing">Ngày đăng</option>
+                    <option value="voucherExpireDate">Thời hạn</option>
+                </select>
+                <select id="voucher-sort-direction" class="sort-direction">
+                    <option value="asc">Tăng dần</option>
+                    <option value="desc">Giảm dần</option>
+                </select>
+                <button id="voucher-apply-sort" class="btn apply-sort">Áp dụng</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Voucher</th>
+                        <th>Giá trị (VND)</th>
+                        <th>Ngày tạo</th>
+                        <th>Thời hạn</th>
+                        <th>Thời điểm sử dụng</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="voucher-table"></tbody>
+            </table>
+            <div id="voucher-load-more-trigger" style="height: 10px;"></div>
+        </div>
+    </div>
+
+   <!-- Giftcode Statistics -->
+   <div id="stats-giftcode" class="main-content">
+    <div class="dashboard-header">
+        <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+    </div>
+    <div class="feedback-detail-header">
+        <h2>Thống kê Giftcode</h2>
+        <div class="sort-controls">
+            <label for="giftcode-sort-field">Sắp xếp theo: </label>
+            <select id="giftcode-sort-field" class="sort-field">
+                <option value="id">ID</option>
+                <option value="value">Giá trị</option>
+                <option value="timeOfListing">Ngày đăng</option>
+            </select>
+            <select id="giftcode-sort-direction" class="sort-direction">
+                <option value="asc">Tăng dần</option>
+                <option value="desc">Giảm dần</option>
+            </select>
+            <button id="giftcode-apply-sort" class="btn apply-sort">Áp dụng</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã code</th>
+                    <th>Giá trị</th>
+                    <th>Ngày tạo</th>
+                    <th>Thông tin thêm</th>
+                    <th>Trạng thái</th>
+                    <th>Thời điểm sử dụng</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="giftcode-table"></tbody>
+        </table>
+        <div id="giftcode-load-more-trigger" style="height: 10px;"></div>
+    </div>
+</div>
+
+    <!-- User Statistics -->
+    <div id="stats-users" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Thống kê người dùng</h2>
+        </div>
+        <div class="filters">
+            <div class="filter-group">
+                <label for="status-filter">Trạng thái:</label>
+                <select id="status-filter">
+                    <option value="">Tất cả</option>
+                    <option value="ACTIVE">Đang hoạt động</option>
+                    <option value="LOCKED">Đang khóa</option>
+                </select>
+        
+                <label for="role-filter">Vai trò:</label>
+                <select id="role-filter">
+                    <option value="">Tất cả</option>
+                    <option value="USER">Người dùng</option>
+                    <option value="AGENCY">Agency</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+        
+                <button class="btn btn-view" id="apply-user-filters">Áp dụng</button>
+            </div>
+        </div>
+        
+    
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Họ tên/Nickname</th>
+                        <th>Tên tài khoản</th>
+                        <th>Số dư (VND)</th>
+                        <th>Trạng thái</th>
+                        <th>Vai trò</th>
+                        <th>Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table"></tbody>
+            </table>
+        </div>
+    </div>
+    <!-- User details and edit users -->
+    <div id="detail-user" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Chi tiết người dùng</h2>
+            <span class="feedback-id">Tên tài khoản: <span id="username-detail"></span></span>
+        </div>
+        <form id="update-user-form" class="settings-form">
+            <input type="hidden" id="user-id" name="id">
+            <div class="feedback-info">
+                <div class="info-item">
+                    <label>Họ tên / Nickname</label>
+                    <input type="text" class="form-control" name="fullname">
+                </div>
+                <div class="info-item">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email">
+                </div>
+                <div class="info-item">
+                    <label>Số dư (VND)</label>
+                    <input type="number" class="form-control" name="balance">
+                </div>
+                <div class="info-item">
+                    <label>Trạng thái</label>
+                    <select class="form-control" name="userStatus">
+                        <option value="ACTIVE">Đang hoạt động</option>
+                        <option value="LOCKED">Khóa tài khoản</option>
+                    </select>
+                </div>
+                <div class="info-item">
+                    <label>Vai trò</label>
+                    <select class="form-control" name="role">
+                        <option value="USER">User</option>
+                        <option value="AGENCY">Agency</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-update">Cập nhật</button>
+                <button type="button" class="btn btn-lock" onclick="deleteUserFromDetail()">Xóa</button>
+                <a href="#" class="btn btn-back" onclick="showSection('stats-users')">Trở về</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="stats-transactions" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Thống kê giao dịch</h2>
+        </div>
+        <div class="stats-panel">
+            <div class="stats-card">
+                <h3>Giao dịch mua tài khoản</h3>
+                <p><i class="fas fa-money-bill"></i> Tổng: <span id="accounts-total">0</span> VND</p>
+            </div>
+            <div class="stats-card">
+                <h3>Giao dịch nạp tiền VNPay</h3>
+                <p><i class="fas fa-money-bill"></i> Tổng: <span id="vnpay-total">0</span> VND</p>
+            </div>
+            <div class="stats-card">
+                <h3>Giao dịch nạp tiền Thẻ cào</h3>
+                <p><i class="fas fa-money-bill"></i> Tổng: <span id="card-total">0</span> VND</p>
+            </div>
+        </div>
+    
+        <div class="tabs">
+            <ul class="tab-links">
+                <li class="active"><a href="#tab-accounts">Giao dịch mua tài khoản</a></li>
+                <li><a href="#tab-vnpay">Nạp tiền VNPay</a></li>
+                <li><a href="#tab-card">Nạp tiền qua thẻ cào</a></li>
+            </ul>
+    
+            <div class="tab-content">
+                <div id="tab-accounts" class="tab active">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tài khoản Game</th>
+                                    <th>Mã số tài khoản</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Người mua</th>
+                                    <th>Giá</th>
+                                    <th>Thời điểm giao dịch</th>
+                                </tr>
+                            </thead>
+                            <tbody id="accounts-table"></tbody>
+                        </table>
+                        <!-- Thêm trigger cho infinite scroll -->
+                        <div id="accounts-load-more-trigger" class="load-more-trigger"></div>
+                    </div>
+                    <div class="refresh-btn-container">
+                        <button class="refresh-btn">Làm mới</button>
+                    </div>
+                </div>
+    
+                <div id="tab-vnpay" class="tab">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Người nạp tiền</th>
+                                    <th>Mã giao dịch</th>
+                                    <th>Số tiền nạp</th>
+                                    <th>Thời điểm giao dịch</th>
+                                    <th>Phương thức</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vnpay-table"></tbody>
+                        </table>
+                        <!-- Thêm trigger cho infinite scroll -->
+                        <div id="vnpay-load-more-trigger" class="load-more-trigger"></div>
+                    </div>
+                    <div class="refresh-btn-container">
+                        <button class="refresh-btn">Làm mới</button>
+                    </div>
+                </div>
+    
+                <div id="tab-card" class="tab">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Người nạp tiền</th>
+                                    <th>Nhà mạng</th>
+                                    <th>Serial</th>
+                                    <th>Số tiền nạp</th>
+                                    <th>Thực nhận</th>
+                                    <th>Thời điểm giao dịch</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="card-transaction-table"></tbody>
+                        </table>
+                        <!-- Thêm trigger cho infinite scroll -->
+                        <div id="card-load-more-trigger" class="load-more-trigger"></div>
+                    </div>
+                    <div class="refresh-btn-container">
+                        <button class="refresh-btn">Làm mới</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card Management -->
+    <div id="manage-cards" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Quản lý thẻ cào</h2>
+        </div>
+        <div class="filters">
+            <div class="filter-group">
+                <label for="card-status-filter">Trạng thái:</label>
+                <select id="card-status-filter" class="filter-select">
+                    <option value="">Tất cả</option>
+                    <option value="PENDING">Chờ duyệt</option>
+                    <option value="SUCCESS">Thành công</option>
+                    <option value="REJECTED">Đã từ chối</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Ngày nạp:</label>
+                <input type="date" id="start-date" placeholder="Từ ngày">
+                <input type="date" id="end-date" placeholder="Đến ngày">
+            </div>
+            <div class="filter-group">
+                <label>Mệnh giá (VND):</label>
+                <input type="number" id="min-value" placeholder="Từ" min="0">
+                <input type="number" id="max-value" placeholder="Đến" min="0">
+            </div>
+            <button id="apply-card-filters">Áp dụng</button>
+        </div>
+        <div class="sort-container">
+            <label for="card-deposits-sort">Sắp xếp theo:</label>
+            <select id="card-deposits-sort" class="sort-select">
+                <option value="timeOfDepositing,desc">Ngày nạp (mới nhất)</option>
+                <option value="timeOfDepositing,asc">Ngày nạp (cũ nhất)</option>
+                <option value="value,desc">Mệnh giá (cao đến thấp)</option>
+                <option value="value,asc">Mệnh giá (thấp đến cao)</option>
+            </select>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nhà mạng</th>
+                        <th>Serial</th>
+                        <th>Mã thẻ</th>
+                        <th>Mệnh giá (VND)</th>
+                        <th>Thực nhận (VND)</th>
+                        <th>Thời gian gửi</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="card-table"></tbody>
+            </table>
+        </div>
+        <!-- Container cho phân trang -->
+        <div id="card-deposits-pagination" class="pagination"></div>
+        <div class="refresh-btn-container">
+            <button class="refresh-btn">Làm mới</button>
+        </div>
+    </div>
+
+    <!-- Settings Deposit Payment Info -->
+    <div id="update-settings" class="main-content">
+        <div class="dashboard-header">
+            <h1><span class="highlight">Admin Panel</span> Shop Acc Game</h1>
+        </div>
+        <div class="feedback-detail-header">
+            <h2>Thông tin thanh toán</h2>
+        </div>
+        <form id="update-settings-form" class="settings-form">
+            <div class="form-group">
+                <label for="viettelTradeCost">Chi phí nạp Viettel (%)</label>
+                <input type="number" id="viettelTradeCost" name="viettelTradeCost" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="mobifoneTradeCost">Chi phí nạp Mobifone (%)</label>
+                <input type="number" id="mobifoneTradeCost" name="mobifoneTradeCost" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="vinaphoneTradeCost">Chi phí nạp Vinaphone (%)</label>
+                <input type="number" id="vinaphoneTradeCost" name="vinaphoneTradeCost" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="qrCodeMomo">URL QR Code Momo</label>
+                <input type="text" id="qrCodeMomo" name="qrCodeMomo" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="qrCodeViettelPay">URL QR Code VNPay</label>
+                <input type="text" id="qrCodeViettelPay" name="qrCodeViettelPay" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-update">Cập nhật</button>
+        </form>
+    </div>
+
+    <div id="notification" class="notification"></div>
+<div id="deleteAccountModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalTitle">Xác nhận xóa tài khoản</div>
+        <div id="modalMessage"></div>
+        <button id="confirmDelete">Xác nhận</button>
+        <button id="cancelDeleteModal">Hủy</button>
+    </div>
+</div>
+<div id="confirmationDeleteVoucher" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Xác Nhận Xóa Voucher</h5>
+            <button type="button" class="close" id="closeDeleteVoucherModal">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p id="deleteVoucherMessage">Bạn có chắc chắn muốn xóa voucher này?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="cancelDeleteVoucher">Hủy</button>
+            <button type="button" class="btn btn-primary" id="confirmDeleteVoucher">Xác Nhận</button>
+        </div>
+    </div>
+</div>
+
+<div id="editVoucherModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Chỉnh Sửa Voucher</h5>
+            <button type="button" class="close" id="closeEditVoucherModal">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="edit-voucher-form">
+                <input type="hidden" id="voucher-id" name="id">
+                <div class="form-group">
+                    <label for="edit-voucher-code">Mã Voucher</label>
+                    <input type="text" id="edit-voucher-code" name="code" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-voucher-value">Giá trị</label>
+                    <input type="number" id="edit-voucher-value" name="value" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-voucher-expiration">Ngày Hết Hạn</label>
+                    <input type="date" id="edit-voucher-expiration" name="voucherExpireDate">
+                </div>
+                <div class="form-group">
+                    <label for="edit-voucher-status">Trạng Thái</label>
+                    <select id="edit-voucher-status" name="promotionStatus">
+                        <option value="AVAILABLE">Chưa sử dụng</option>
+                        <option value="USED">Đã sử dụng</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="cancelEditVoucher">Hủy</button>
+            <button type="submit" form="edit-voucher-form" class="btn btn-primary">Lưu</button>
+        </div>
+    </div>
+</div>
+
+<div id="confirmationDeleteGiftcode" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Xác Nhận Xóa Giftcode</h5>
+            <button type="button" class="close" id="closeDeleteGiftcodeModal">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p id="deleteGiftcodeMessage">Bạn có chắc chắn muốn xóa voucher này?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="cancelDeleteGiftcode">Hủy</button>
+            <button type="button" class="btn btn-primary" id="confirmDeleteGiftcode">Xác Nhận</button>
+        </div>
+    </div>
+</div>
+<div id="editGiftcodeModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Chỉnh Sửa Giftcode</h5>
+            <button type="button" class="close" id="closeEditGiftcodeModal"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <form id="edit-giftcode-form">
+                <input type="hidden" id="giftcode-id" name="id">
+                <div class="form-group">
+                    <label for="edit-giftcode-code">Mã Giftcode</label>
+                    <input type="text" id="edit-giftcode-code" name="code" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-giftcode-value">Giá trị (VND)</label>
+                    <input type="number" id="edit-giftcode-value" name="value" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-giftcode-info">Thông tin thêm</label>
+                    <input type="text" id="edit-giftcode-info" name="giftcodeInfo" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-giftcode-status">Trạng Thái</label>
+                    <select id="edit-giftcode-status" name="promotionStatus">
+                        <option value="AVAILABLE">Chưa sử dụng</option>
+                        <option value="USED">Đã sử dụng</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelEditGiftcode">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="ApprovalConfirmationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Xác Nhận Hành Động</h5>
+            <button type="button" class="close" id="closeApprovalConfirmationModal">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p id="approvalConfirmationModalBody">Bạn có chắc chắn muốn thực hiện hành động này?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="cancelActionBtn">Hủy</button>
+            <button type="button" class="btn btn-primary" id="confirmActionBtn">Xác Nhận</button>
+        </div>
+    </div>
+</div>
+<script src="/js/admin/voucher.js"></script>
+<script src="/js/admin/giftcode.js"></script>
+<script src="/js/admin/card-management.js"></script>
+<script src="/js/admin/adminpanel.js"></script>
+</body>
+</html>
